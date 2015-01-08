@@ -9,7 +9,7 @@
 
 
 /** 
-* Checks array to make sure it is unique numbers from 1-9
+* Checks an array to make sure it is unique numbers from 1-9
 *    
 */
 function checkSeries(sudokuArray) {
