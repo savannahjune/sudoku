@@ -7,6 +7,12 @@
 // for row in matrix:
 //	col.append(row[COL_TO_CAPTURE])
 
+/** 
+* Checks an two dimensional array to see that 
+*    
+*/
+
+
 
 /** 
 * Checks an array to make sure it is unique numbers from 1-9
