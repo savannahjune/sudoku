@@ -3,8 +3,12 @@
 $(document).ready(function () {
 
 	// TESTING ONLY
-	populateTestPuzzle();
+	// populateTestPuzzle();
 	// END TESTING ONLY
+
+	// to make beginning puzzle
+
+	populatePuzzle();
 
 	$("#check-submission").click(function(evt) {
 		evt.preventDefault();
@@ -159,6 +163,30 @@ function populateTestPuzzle() {
 
 	for (var row = 0; row < 9; row++) {
 		for (var column = 0; column < 9; column++) {
+			$("#" + row + "-" + column).val(testPuzzle[row][column]);
+		}
+	}
+}
+
+function populatePuzzle() {
+	var testPuzzle = [
+		[5,3,,,7,,,,],
+		[6,,,1,9,5,,,],
+		[,9,8,,,,,6,],
+		[8,,,,6,,,,3],
+		[4,,,8,,3,,,1],
+		[7,,,,2,,,,6],
+		[,6,,,,,2,8,],
+		[,,,4,1,9,,,5],
+		[,,,,8,,,7,9]
+	];
+
+	for (var row = 0; row < 9; row++) {
+		for (var column = 0; column < 9; column++) {
+			if (testPuzzle[row][column] !== undefined) {
+				$("#" + row + "-" + column).val(testPuzzle[row][column]);
+				$("#" + row + "-" + column).attr ('readonly', true);
+			}
 			$("#" + row + "-" + column).val(testPuzzle[row][column]);
 		}
 	}
