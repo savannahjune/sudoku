@@ -2,17 +2,18 @@ doctype html
 html(lang="en")
 	head
 		link(rel='stylesheet',href='../static/css/style.css', type='text/css')
+		script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
 		script(type='text/javascript', src='../static/js/sudoku_checker.js')
 
 body
-	
+
 	h1 Sudoku
 	- var SIZE = 9
 	table(id="grid", border="1", style="border-collapse: collapse;")
 		- for (var row = 0; row < SIZE; row++)
 			tr(class="row")
 				- for (var col = 0; col < SIZE; col++)
-					td(class="cell", id="#{row}-#{col}")
-						input(type="text", maxlength="1", size="1")
+					td(class="cell")
+						input(id="#{row}-#{col}", type="number", min="1", max="9", maxlength="1", size="1")
 
-	button(type="submit") BLAH BLAH	
+	button(type="submit" id="check-submission") BLAH BLAH	

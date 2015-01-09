@@ -7,12 +7,39 @@
 // for row in matrix:
 //	col.append(row[COL_TO_CAPTURE])
 
-/** 
-* Checks an two dimensional array to see that 
-*    
-*/
+$(document).ready(function () {
 
+	$("#check-submission").click(function(evt) {
+		evt.preventDefault();
+		console.log( "Pressed the button y'all" );
+		// iterate over rows
+			// iterate over colors
+				// matrix[row][col] = $(' + String(row) + '-' + String(col) + ').val()
 
+		var answerMatrix = [];
+
+		for (var row = 0; row < 9; row++) {
+			// executed for each row (9 times)
+			var arrayRow = [];
+			for (var column = 0; column < 9; column++) {
+				// executed 9 times for each row
+				idFromForm = "#" + row + "-" + column;
+				console.log(typeof idFromForm);
+				var number = parseInt($(idFromForm).val(), 10) || 0;
+				if (number === 0) {
+					console.log("Not solved");
+					return;
+				}
+				arrayRow.push(number);
+			}
+			// we've completed a row
+			answerMatrix.push(arrayRow);
+		}
+		console.log(answerMatrix);
+		// Figure out how to feed every row / col
+
+	});
+});
 
 /** 
 * Checks an array to make sure it is unique numbers from 1-9
@@ -26,22 +53,22 @@ function checkSeries(sudokuArray) {
 
 	var sortedArray = sudokuArray.sort(sortNumber);
 
-	var num_previous = sortedArray[0];
+	var numPrevious = sortedArray[0];
 
-	if (num_previous !== 1 || sortedArray.length !== 9) {
+	if (numPrevious !== 1 || sortedArray.length !== 9) {
 		console.log("Array is invalid!");
 		return false;
 	}
 
 	for (var i = 1; i < sortedArray.length - 1; i++) {
 		var number = sortedArray[i];
-		console.log('testing that ' + number + ' != ' + num_previous);
+		console.log('testing that ' + number + ' != ' + numPrevious);
 
-		if (num_previous === number) {
+		if (numPrevious === number) {
 			console.log('Array is invalid!');
 			return false;
 		}
-		num_previous = number;
+		numPrevious = number;
 	}
 	console.log('Array is valid!');
 	return true;
@@ -56,3 +83,4 @@ function checkSeries(sudokuArray) {
 var numArray = [3, 2, 7, 5, 8, 9, 4, 8, 7];
 
 checkSeries(numArray);
+
