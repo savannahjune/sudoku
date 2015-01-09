@@ -43,6 +43,12 @@ textarea, input {
   outline: 0;
   border: 0; }
 
+input:read-only {
+  color: black; }
+
+input {
+  color: #F5C53D; }
+
 button {
   margin: 1em auto;
   background-color: #F6E8C9;

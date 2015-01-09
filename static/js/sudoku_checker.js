@@ -6,37 +6,28 @@ $(document).ready(function () {
 		evt.preventDefault();
 		console.log( "Pressed the button y'all" );
 
-		var answerMatrix = [];
-
-		for (var row = 0; row < 9; row++) {
-			// executed for each row (9 times)
-			var arrayRow = [];
-			for (var column = 0; column < 9; column++) {
-				// executed 9 times for each row
-				idFromForm = "#" + row + "-" + column;
-				console.log(typeof idFromForm);
-				var number = parseInt($(idFromForm).val(), 10) || 0;
-				if (number === 0) {
-					console.log("Not solved");
-					return;
-				}
-				arrayRow.push(number);
-			}
-			// we've completed a row
-			answerMatrix.push(arrayRow);
+		var answerMatrix = gatherMatrix();
+		// answerMatrix is undefined 
+		if (answerMatrix === undefined) {
+			alert("You didn't finish your puzzle. Try again!");
 		}
-		console.log(answerMatrix);
-		
-		checkRows(answerMatrix);
-		checkColumns(answerMatrix);
-
+		checkPuzzle(answerMatrix);
 	});
 });
 
+function checkPuzzle(answerMatrix) {
+	return checkRows(answerMatrix) && checkColumns(answerMatrix) && checkSquares(answerMatrix);
+}
+
 function checkRows(answerMatrix) {
 	for (var row=0; row<9; row++) {
-		checkSeries(answerMatrix[row]);
+		if (checkSeries(answerMatrix[row]) === false) {
+			console.log("Row failed at " + row);
+			return false;
+		}
 	}
+	// passed ater all rows were checked
+	return true;
 }
 
 function checkColumns(answerMatrix) {
@@ -44,9 +35,14 @@ function checkColumns(answerMatrix) {
 	for (var column = 0; column < 9; column++) {
 		for (var row = 0; row < 9; row++) {
 			columnArray.push(answerMatrix[row][column]);
+			console.log("This is the column array" + columnArray);
 		}
-		checkSeries(columnArray);
+		if (checkSeries(columnArray) === false) {
+			console.log("Column failed at " + column);
+			return false;
+		}
 	}
+	return true;
 }
 
 function checkSquares(answerMatrix) {
@@ -61,9 +57,13 @@ function checkSquares(answerMatrix) {
 					squareArray.push(answerMatrix[row][column]);
 				}
 			}
-			checkSeries(squareArray);
+			if (checkSeries(squareArray) === false){
+				console.log("Square failed at row " + square_row_index + " column " + square_column_index);
+				return false;
+			}
 		}
 	}
+	return true;
 }
 
 /** 
@@ -97,7 +97,6 @@ function checkSeries(sudokuArray) {
 	return true;
 }
 
-
 // perfect array
 // var numArray = [6, 4, 2, 3, 9, 7, 1, 8, 5];
 // array with duplicates
@@ -109,5 +108,26 @@ function checkSeries(sudokuArray) {
 
 // checkSeries(numArray);
 
+function gatherMatrix() {
+	var answerMatrix = [];
 
-
+	for (var row = 0; row < 9; row++) {
+		// executed for each row (9 times)
+		var arrayRow = [];
+		for (var column = 0; column < 9; column++) {
+			// executed 9 times for each row
+			idFromForm = "#" + row + "-" + column;
+			console.log(typeof idFromForm);
+			var number = parseInt($(idFromForm).val(), 10) || 0;
+			if (number === 0 || number > 9) {
+				console.log("Not solved. Empty spot or number greater than nine.");
+				return;
+			}
+			arrayRow.push(number);
+		}
+		// we've completed a row
+		answerMatrix.push(arrayRow);
+	}
+	console.log(answerMatrix);
+	return answerMatrix;
+}

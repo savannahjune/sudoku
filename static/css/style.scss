@@ -1,6 +1,7 @@
 $font-stack: Helvetica, sans-serif;
 $blue: #6BD5E0;
 $grey: #E8ECF0;
+$darkgrey: #B5B5B6;
 $taupe: #F6E8C9;
 $orange: #F5C53D;
 
@@ -68,6 +69,14 @@ textarea:focus, input:focus{
 textarea, input{
     outline: 0;
     border: 0;
+}
+
+input:read-only {
+	color: black;
+}
+
+input {
+	color: $orange;
 }
 
 button {
