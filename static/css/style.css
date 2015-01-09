@@ -45,11 +45,18 @@ textarea, input {
 
 button {
   margin: 1em auto;
-  background-color: white;
+  background-color: #F6E8C9;
   align: center;
   width: 60%;
   height: 40px;
-  margin-left: 20%; }
+  margin-left: 20%;
+  outline: none;
+  border: #6BD5E0 solid 3px;
+  font-size: 18pt; }
+
+button:active, button:focus, button:hover {
+  outline: none;
+  border: #F5C53D solid 3px; }
 
 input {
   width: 95%;

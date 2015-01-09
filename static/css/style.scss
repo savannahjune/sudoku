@@ -1,6 +1,8 @@
 $font-stack: Helvetica, sans-serif;
 $blue: #6BD5E0;
 $grey: #E8ECF0;
+$taupe: #F6E8C9;
+$orange: #F5C53D;
 
 
 html {
@@ -36,19 +38,19 @@ td {
   border:1px solid;
   text-align:center;
 }
+
 td:first-child {
   border-left:solid;
 }
+
 td:nth-child(3n) {
   border-right:solid ;
 }
-tr {
-  //width: 20%;
-  //height:30px;
-}
+
 tr:first-child {
   border-top:solid;
 }
+
 tr:nth-child(3n) td {
   border-bottom:solid ;
 }
@@ -70,11 +72,19 @@ textarea, input{
 
 button {
 	margin: 1em auto;
-	background-color: white;
+	background-color: $taupe;
 	align: center;
 	width: 60%;
 	height: 40px;
 	margin-left: 20%;
+	outline: none;
+	border: $blue solid 3px;
+	font-size: 18pt;
+}
+
+button:active, button:focus, button:hover {
+	outline: none;
+	border: $orange solid 3px;
 }
 
 input {
