@@ -3,12 +3,11 @@
 $(document).ready(function () {
 
 	// TESTING ONLY
-	// populateTestPuzzle();
+	populateTestPuzzle();
 	// END TESTING ONLY
 
 	// to make beginning puzzle
-
-	populatePuzzle();
+	// populatePuzzle();
 
 	$("#check-submission").click(function(evt) {
 		evt.preventDefault();
@@ -20,9 +19,13 @@ $(document).ready(function () {
 			alert("You didn't finish your puzzle. Try again!");
 		}
 		if (checkPuzzle(answerMatrix)) {
-			alert("Winning Accomplished!");
+			// alert("Winning Accomplished!");
+			$("body").css('color', '#A1FFC8');
+			$("h1").html("<h1 style=font-size: 25%>You win!</h1>");
+
 		} else {
-			alert("You are not winner :/");
+			$("body").css('color', '#FF7568');
+			$("h1").html("<h1 style=font-size: 25%>You lost!</h1>");
 		}
 	});
 });
@@ -35,7 +38,7 @@ function checkRows(answerMatrix) {
 	for (var row=0; row<9; row++) {
 		if (checkSeries(answerMatrix[row]) === false) {
 			console.log("Row failed at " + row);
-			return false;
+			return (false);
 		}
 	}
 	// passed ater all rows were checked

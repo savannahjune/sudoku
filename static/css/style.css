@@ -41,9 +41,14 @@ textarea:focus, input:focus {
 
 textarea, input {
   outline: 0;
-  border: 0; }
+  border: 0;
+  font-size: 150%; }
 
 input:read-only {
+  color: black; }
+
+input:-moz-read-only {
+  /* For Firefox */
   color: black; }
 
 input {
