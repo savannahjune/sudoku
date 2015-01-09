@@ -2,6 +2,10 @@
 
 $(document).ready(function () {
 
+	// TESTING ONLY
+	populateTestPuzzle();
+	// END TESTING ONLY
+
 	$("#check-submission").click(function(evt) {
 		evt.preventDefault();
 		console.log( "Pressed the button y'all" );
@@ -11,7 +15,11 @@ $(document).ready(function () {
 		if (answerMatrix === undefined) {
 			alert("You didn't finish your puzzle. Try again!");
 		}
-		checkPuzzle(answerMatrix);
+		if (checkPuzzle(answerMatrix)) {
+			alert("Winning Accomplished!");
+		} else {
+			alert("You are not winner :/");
+		}
 	});
 });
 
@@ -27,21 +35,23 @@ function checkRows(answerMatrix) {
 		}
 	}
 	// passed ater all rows were checked
+	console.log('All rows are valid');
 	return true;
 }
 
 function checkColumns(answerMatrix) {
-	var columnArray = [];
 	for (var column = 0; column < 9; column++) {
+		var columnArray = [];
 		for (var row = 0; row < 9; row++) {
 			columnArray.push(answerMatrix[row][column]);
-			console.log("This is the column array" + columnArray);
 		}
+		console.log("Checking column array " + columnArray);
 		if (checkSeries(columnArray) === false) {
 			console.log("Column failed at " + column);
 			return false;
 		}
 	}
+	console.log('All columns are valid');
 	return true;
 }
 
@@ -63,6 +73,7 @@ function checkSquares(answerMatrix) {
 			}
 		}
 	}
+	console.log('All squares are valid');
 	return true;
 }
 
@@ -76,7 +87,8 @@ function checkSeries(sudokuArray) {
 		return a - b;
 	}
 
-	var sortedArray = sudokuArray.sort(sortNumber);
+	// slice(0) clones the complete array
+	var sortedArray = sudokuArray.slice(0).sort(sortNumber);
 	var numPrevious = sortedArray[0];
 
 	if (numPrevious !== 1 || sortedArray.length !== 9) {
@@ -84,7 +96,7 @@ function checkSeries(sudokuArray) {
 		return false;
 	}
 
-	for (var i = 1; i < sortedArray.length - 1; i++) {
+	for (var i = 1; i < sortedArray.length; i++) {
 		var number = sortedArray[i];
 		console.log('testing that ' + number + ' != ' + numPrevious);
 		if (numPrevious === number) {
@@ -130,4 +142,24 @@ function gatherMatrix() {
 	}
 	console.log(answerMatrix);
 	return answerMatrix;
+}
+
+function populateTestPuzzle() {
+	var testPuzzle = [
+		[5,3,4,6,7,8,9,1,2],
+		[6,7,2,1,9,5,3,4,8],
+		[1,9,8,3,4,2,5,6,7],
+		[8,5,9,7,6,1,4,2,3],
+		[4,2,6,8,5,3,7,9,1],
+		[7,1,3,9,2,4,8,5,6],
+		[9,6,1,5,3,7,2,8,4],
+		[2,8,7,4,1,9,6,3,5],
+		[3,4,5,2,8,6,1,7,9]
+	];
+
+	for (var row = 0; row < 9; row++) {
+		for (var column = 0; column < 9; column++) {
+			$("#" + row + "-" + column).val(testPuzzle[row][column]);
+		}
+	}
 }
