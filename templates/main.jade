@@ -5,15 +5,14 @@ html(lang="en")
 		script(type='text/javascript', src='../static/js/sudoku_checker.js')
 
 body
-
+	
 	h1 Sudoku
-
 	- var SIZE = 9
-	table(id="grid", border="1", style="border-collapse: collapse;", width="400px")
+	table(id="grid", border="1", style="border-collapse: collapse;")
 		- for (var row = 0; row < SIZE; row++)
 			tr(class="row")
 				- for (var col = 0; col < SIZE; col++)
-					td(class="cell", id="#{row}-#{col}", width="20px")
-						input(type="text", maxlength="1", width="20px")
+					td(class="cell", id="#{row}-#{col}")
+						input(type="text", maxlength="1", size="1")
 
 	button(type="submit") BLAH BLAH	

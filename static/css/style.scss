@@ -1,28 +1,38 @@
 $font-stack: Helvetica, sans-serif;
-$primary-color: #6BD5E0;
+$blue: #6BD5E0;
 $grey: #E8ECF0;
 
 
 html {
+	height: 100%;
 	//width: 100%;
 }
+
 body {
+  height: 100%;
   font: 100% $font-stack;
-  color: $primary-color;
-  border: 1.6%
+  color: $blue;
 } 
 
-table {
-  margin:1em auto;
-  //width: 60%;
+// #align_er {
+//   margin: 1em auto;
+//   height: 60%;
+//   width: 60%;
+// }
+
+h1 {
+  margin: 1em auto;
+  width: 60%;
 }
 
-tbody{
-  //width: 60%;
+table {
+  margin: 1em auto;
+  height: 60%;
+  width: 60%;
 }
+
 
 td {
-  height:30px;
   border:1px solid;
   text-align:center;
 }
@@ -43,6 +53,11 @@ tr:nth-child(3n) td {
   border-bottom:solid ;
 }
 
+.container {
+	height: 100%;
+	width: 100%;
+}
+
 textarea:focus, input:focus{
     outline: 0;
     background-color: $grey;
@@ -54,5 +69,17 @@ textarea, input{
 }
 
 button {
+	margin: 1em auto;
 	background-color: white;
+	align: center;
+	width: 60%;
+	height: 40px;
+	margin-left: 20%;
+}
+
+input {
+	width: 95%;
+	height: 95%;
+	text-align: center;
+	font-size: 200%;
 }
