@@ -1,17 +1,28 @@
 $font-stack: Helvetica, sans-serif;
-$primary-color: #333;
+$primary-color: #6BD5E0;
+$grey: #E8ECF0;
 
+
+html {
+	//width: 100%;
+}
 body {
   font: 100% $font-stack;
   color: $primary-color;
+  border: 1.6%
 } 
 
 table {
   margin:1em auto;
+  //width: 60%;
 }
+
+tbody{
+  //width: 60%;
+}
+
 td {
   height:30px;
-  width:30px;
   border:1px solid;
   text-align:center;
 }
@@ -21,9 +32,27 @@ td:first-child {
 td:nth-child(3n) {
   border-right:solid ;
 }
+tr {
+  //width: 20%;
+  //height:30px;
+}
 tr:first-child {
   border-top:solid;
 }
 tr:nth-child(3n) td {
   border-bottom:solid ;
+}
+
+textarea:focus, input:focus{
+    outline: 0;
+    background-color: $grey;
+}
+
+textarea, input{
+    outline: 0;
+    border: 0;
+}
+
+button {
+	background-color: white;
 }

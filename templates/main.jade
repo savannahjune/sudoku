@@ -1,17 +1,19 @@
 doctype html
 html(lang="en")
 	head
-		link(rel='stylesheet',href='static/css/main.css', type='text/css')
-		script(type='text/javascript', src='static/js/sudoku_checker.js')
+		link(rel='stylesheet',href='../static/css/style.css', type='text/css')
+		script(type='text/javascript', src='../static/js/sudoku_checker.js')
 
-h1 "Sudoku"
+body
 
-- var SIZE = 9
+	h1 Sudoku
 
-div
-	table(id="grid", border="1", style="border-collapse: collapse;")
+	- var SIZE = 9
+	table(id="grid", border="1", style="border-collapse: collapse;", width="400px")
 		- for (var row = 0; row < SIZE; row++)
 			tr(class="row")
 				- for (var col = 0; col < SIZE; col++)
-					td(class="cell", id="#{row}-#{col}")
-						input(type="text", maxlength="1")
+					td(class="cell", id="#{row}-#{col}", width="20px")
+						input(type="text", maxlength="1", width="20px")
+
+	button(type="submit") BLAH BLAH	

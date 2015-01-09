@@ -1,13 +1,13 @@
 body {
   font: 100% Helvetica, sans-serif;
-  color: #333; }
+  color: #6BD5E0;
+  border: 1.6%; }
 
 table {
   margin: 1em auto; }
 
 td {
   height: 30px;
-  width: 30px;
   border: 1px solid;
   text-align: center; }
 
@@ -22,5 +22,16 @@ tr:first-child {
 
 tr:nth-child(3n) td {
   border-bottom: solid; }
+
+textarea:focus, input:focus {
+  outline: 0;
+  background-color: #E8ECF0; }
+
+textarea, input {
+  outline: 0;
+  border: 0; }
+
+button {
+  background-color: white; }
 
 /*# sourceMappingURL=style.css.map */
