@@ -1,3 +1,8 @@
+/** 
+ * JavaScript file that populates and tests sudoku puzzles.
+ * Can create a test version that is complete, 
+ * or partially filled in version for users.    
+ */
 
 
 $(document).ready(function () {
@@ -9,17 +14,16 @@ $(document).ready(function () {
 	// to make beginning puzzle
 	populatePuzzle();
 
+	// when user clicks check my solution, script begins tests
 	$("#check-submission").click(function(evt) {
 		evt.preventDefault();
-		console.log( "Pressed the button y'all" );
 
+		// gathers answers from the sudoku matrix
 		var answerMatrix = gatherMatrix();
 		// answerMatrix is undefined 
 		if (answerMatrix === undefined) {
 			alert("You didn't finish your puzzle. Try again!");
-		}
-		if (checkPuzzle(answerMatrix)) {
-			// alert("Winning Accomplished!");
+		} if (testPuzzle(answerMatrix)) {
 			$("body").css('color', '#A1FFC8');
 			$("h1").html("<h1 style=font-size: 25%>You win!</h1>");
 
@@ -30,39 +34,56 @@ $(document).ready(function () {
 	});
 });
 
-function checkPuzzle(answerMatrix) {
-	return checkRows(answerMatrix) && checkColumns(answerMatrix) && checkSquares(answerMatrix);
+// function that includes calls to functions that create rows, columns, and squares for testing
+function testPuzzle(answerMatrix) {
+	return testRows(answerMatrix) && testColumns(answerMatrix) && testSquares(answerMatrix);
 }
 
-function checkRows(answerMatrix) {
+/** 
+ * function that creates rows & sends row arrays to test series to see if they are valid sudoku rows
+ * @param {answerMatrix} <array> two dimensional array from the DOM representing sudoku answer
+ * @return {true or false} <boolean> whether answers for rows are correct or not after being sent to the testSeries function
+ */
+function testRows(answerMatrix) {
 	for (var row=0; row<9; row++) {
-		if (checkSeries(answerMatrix[row]) === false) {
+		if (testSeries(answerMatrix[row]) === false) {
 			console.log("Row failed at " + row);
 			return (false);
 		}
 	}
-	// passed ater all rows were checked
-	console.log('All rows are valid');
+	// passed ater all rows were tested
 	return true;
 }
 
-function checkColumns(answerMatrix) {
+/** 
+ * function that creates columns & sends column arrays to test series to see if they are valid sudoku columns
+ * @param {answerMatrix} <array> two dimensional array from the DOM representing sudoku answer
+ * @return {true or false} <boolean> whether answers for columns are correct or not after being sent to the testSeries function
+ */
+
+function testColumns(answerMatrix) {
 	for (var column = 0; column < 9; column++) {
 		var columnArray = [];
 		for (var row = 0; row < 9; row++) {
 			columnArray.push(answerMatrix[row][column]);
 		}
-		console.log("Checking column array " + columnArray);
-		if (checkSeries(columnArray) === false) {
-			console.log("Column failed at " + column);
+		if (testSeries(columnArray) === false) {
+			// console.log("Column failed at " + column);
 			return false;
 		}
 	}
-	console.log('All columns are valid');
 	return true;
 }
 
-function checkSquares(answerMatrix) {
+/** 
+ * function that creates squares & sends square arrays to test series to see if they are valid sudoku squares
+ * squares are groups of nine numbers in corners of sudoku puzzle 
+ * @param {answerMatrix} <array> two dimensional array from the DOM representing sudoku answer
+ * @return {true or false} <boolean> whether answers for squares are correct or not after being sent to the testSeries function
+ */
+
+
+function testSquares(answerMatrix) {
 	var col_offset = [0, 3, 6];
 	var row_offset = [0, 3, 6];
 
@@ -74,21 +95,20 @@ function checkSquares(answerMatrix) {
 					squareArray.push(answerMatrix[row][column]);
 				}
 			}
-			if (checkSeries(squareArray) === false){
-				console.log("Square failed at row " + square_row_index + " column " + square_column_index);
+			if (testSeries(squareArray) === false){
+				// console.log("Square failed at row " + square_row_index + " column " + square_column_index);
 				return false;
 			}
 		}
 	}
-	console.log('All squares are valid');
 	return true;
 }
 
 /** 
-* Checks an array to make sure it is unique numbers from 1-9
-*    
-*/
-function checkSeries(sudokuArray) {
+ * Tests an array to make sure it is unique numbers from 1-9
+ *    
+ */
+function testSeries(sudokuArray) {
 
 	function sortNumber(a,b) {
 		return a - b;
@@ -99,23 +119,20 @@ function checkSeries(sudokuArray) {
 	var numPrevious = sortedArray[0];
 
 	if (numPrevious !== 1 || sortedArray.length !== 9) {
-		console.log("Array is invalid!");
 		return false;
 	}
 
 	for (var i = 1; i < sortedArray.length; i++) {
 		var number = sortedArray[i];
-		console.log('testing that ' + number + ' != ' + numPrevious);
 		if (numPrevious === number) {
-			console.log('Array is invalid!');
 			return false;
 		}
 		numPrevious = number;
 	}
-	console.log('Array is valid!');
 	return true;
 }
 
+// Arrays for testing testSeries
 // perfect array
 // var numArray = [6, 4, 2, 3, 9, 7, 1, 8, 5];
 // array with duplicates
@@ -125,7 +142,10 @@ function checkSeries(sudokuArray) {
 // array with no one as first entry
 // var numArray = [3, 2, 7, 5, 8, 9, 4, 8, 7];
 
-// checkSeries(numArray);
+/** 
+ * Gathers the matrix for creating rows, columns, and squares from the DOM
+ *    
+ */
 
 function gatherMatrix() {
 	var answerMatrix = [];
@@ -139,17 +159,21 @@ function gatherMatrix() {
 			console.log(typeof idFromForm);
 			var number = parseInt($(idFromForm).val(), 10) || 0;
 			if (number === 0 || number > 9) {
-				console.log("Not solved. Empty spot or number greater than nine.");
+				// console.log("Not solved. Empty spot or number greater than nine.");
 				return;
 			}
 			arrayRow.push(number);
 		}
-		// we've completed a row
 		answerMatrix.push(arrayRow);
 	}
 	console.log(answerMatrix);
 	return answerMatrix;
 }
+
+/** 
+ * Creates fully populated and correct answer for testing purposes
+ * developers can then easily test off by one, two answer arrays, etc.   
+ */
 
 function populateTestPuzzle() {
 	var testPuzzle = [
@@ -170,6 +194,11 @@ function populateTestPuzzle() {
 		}
 	}
 }
+
+/** 
+ * Creates partially populated puzzle for users to complete
+ *   
+ */
 
 function populatePuzzle() {
 	var testPuzzle = [
