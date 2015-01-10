@@ -48,7 +48,7 @@ function testRows(answerMatrix) {
 	for (var row=0; row<9; row++) {
 		if (testSeries(answerMatrix[row]) === false) {
 			console.log("Row failed at " + row);
-			return (false);
+			return false;
 		}
 	}
 	// passed ater all rows were tested
@@ -166,7 +166,6 @@ function gatherMatrix() {
 		}
 		answerMatrix.push(arrayRow);
 	}
-	console.log(answerMatrix);
 	return answerMatrix;
 }
 
