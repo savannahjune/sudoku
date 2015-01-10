@@ -25,11 +25,11 @@ $(document).ready(function () {
 			alert("You didn't finish your puzzle. Try again!");
 		} if (testPuzzle(answerMatrix)) {
 			$("body").css('color', '#A1FFC8');
-			$("h1").html("<h1 style=font-size: 25%>You win!</h1>");
+			$("h1").html("<h3 style=font-size: 25%>You win!</h3>");
 
 		} else {
 			$("body").css('color', '#FF7568');
-			$("h1").html("<h1 style=font-size: 25%>You lost!</h1>");
+			$("h1").html("<h3 style=font-size: 25%>Not quite right, try again.</h3>");
 		}
 	});
 });
