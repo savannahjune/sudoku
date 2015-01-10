@@ -3,11 +3,11 @@
 $(document).ready(function () {
 
 	// TESTING ONLY
-	populateTestPuzzle();
+	// populateTestPuzzle();
 	// END TESTING ONLY
 
 	// to make beginning puzzle
-	// populatePuzzle();
+	populatePuzzle();
 
 	$("#check-submission").click(function(evt) {
 		evt.preventDefault();
